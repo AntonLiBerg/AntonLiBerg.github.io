@@ -67,6 +67,7 @@ h1{margin:0 0 8px; font-size:42px; letter-spacing:-.02em}
   background: rgba(255,255,255,.03);
   padding:18px;
   box-shadow: var(--shadow);
+  margin-top: 12px;
 }
 h2{margin:0 0 10px; font-size:18px}
 h3{margin:10px 0 4px; font-size:14px}
