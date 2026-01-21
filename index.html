@@ -236,6 +236,34 @@
               </div>
             </a>
           </div>
+          <div class="chips chips-right">
+            <span class="chip"><a href="#book-modal" id="book-list-trigger" aria-haspopup="dialog" aria-expanded="false">Full list here</a></span>
+          </div>
+          <div id="book-modal" class="modal" aria-hidden="true">
+            <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="book-modal-title">
+              <button class="modal-close" type="button" aria-label="Close book list" data-modal-close>&times;</button>
+              <h3 id="book-modal-title">Full reading list</h3>
+              <ul class="modal-list">
+                <li><strong>The Inner Game of Tennis</strong> - W. Timothy Gallwey</li>
+                <li><strong>Motivationsrevolutionen</strong> - Magnus Lindwall & Olof Röhlander</li>
+                <li><strong>The Checklist Manifesto</strong> - Atul Gawande</li>
+                <li><strong>Nudge</strong> - Richard H. Thaler &amp; Cass R. Sunstein</li>
+                <li><strong>Mindset: The New Psychology of Success</strong> - Carol S. Dweck</li>
+                <li><strong>Thinking, Fast and Slow</strong> - Daniel Kahneman</li>
+                <li><strong>Noise</strong> - Daniel Kahneman, Olivier Sibony &amp; Cass R. Sunstein</li>
+                <li><strong>Thus Spake Zarathustra</strong> - Friedrich Nietzsche</li>
+                <li><strong>1984</strong> - George Orwell</li>
+                <li><strong>The Road to Wigan Pier</strong> - George Orwell</li>
+                <li><strong>Animal Farm</strong> - George Orwell</li>
+                <li><strong>Meditations</strong> - Marcus Aurelius</li>
+                <li><strong>The Prince</strong> - Niccolo Machiavelli</li>
+                <li><strong>The Great Transformation</strong> - Karl Polanyi</li>
+                <li><strong>Crime and Punishment</strong> - Fyodor Dostoevsky</li>
+                <li><strong>Existentialism is a Humanism</strong> - Jean-Paul Sartre</li>
+                <li><strong>Republic</strong> - Plato</li>
+              </ul>
+            </div>
+          </div>
         </article>
         <article class="card">
           <h2>Content creator recommendations</h2>
@@ -283,7 +311,57 @@
     </footer>
 
     <script>
-      document.getElementById("y").textContent = new Date().getFullYear();
+      (function(){
+        const yearEl = document.getElementById("y");
+        if (yearEl) {
+          yearEl.textContent = new Date().getFullYear();
+        }
+
+        const modal = document.getElementById("book-modal");
+        const trigger = document.getElementById("book-list-trigger");
+        if (!modal || !trigger) {
+          return;
+        }
+
+        const closeButtons = modal.querySelectorAll("[data-modal-close]");
+
+        const openModal = () => {
+          modal.classList.add("open");
+          modal.setAttribute("aria-hidden", "false");
+          document.body.style.overflow = "hidden";
+          trigger.setAttribute("aria-expanded", "true");
+          modal.querySelector(".modal-close")?.focus();
+        };
+
+        const closeModal = () => {
+          modal.classList.remove("open");
+          modal.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+          trigger.setAttribute("aria-expanded", "false");
+          trigger.focus();
+        };
+
+        trigger.addEventListener("click", (event) => {
+          event.preventDefault();
+          openModal();
+        });
+
+        closeButtons.forEach((btn) => {
+          btn.addEventListener("click", closeModal);
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && modal.classList.contains("open")) {
+            closeModal();
+          }
+        });
+
+        modal.addEventListener("click", (event) => {
+          if (event.target === modal) {
+            closeModal();
+          }
+        });
+      })();
     </script>
   </body>
 </html>
