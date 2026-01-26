@@ -102,11 +102,14 @@ h3{margin:10px 0 4px; font-size:14px}
   position:relative;
   width:100%;
   max-width:640px;
+  max-height:calc(100vh - 40px);
   background: rgba(15,26,51,.98);
   border-radius:var(--radius);
   border:1px solid var(--border);
   padding:24px 24px 20px;
   box-shadow: var(--shadow);
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
 }
 .modal-content h3{
   margin:0 0 8px;
@@ -130,6 +133,23 @@ h3{margin:10px 0 4px; font-size:14px}
   line-height:1.6;
 }
 .modal-list li strong{color:var(--text)}
+
+@media (max-width: 640px){
+  .modal{
+    padding:16px;
+  }
+  .modal-content{
+    padding:18px 16px 16px;
+    max-width:100%;
+  }
+  .modal-content h3{
+    font-size:20px;
+  }
+  .modal-list{
+    padding-left:18px;
+    font-size:14px;
+  }
+}
 
 .cols{
   display:grid;
